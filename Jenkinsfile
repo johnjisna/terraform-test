@@ -2,36 +2,36 @@ pipeline {
     agent any
 
     tools {
-        terraform 'Terraform' 
+        terraform 'Terraform'
     }
 
     stages {
+        stage('Checkout Code') {
+            steps {
+                checkout scm
+            }
+        }
+
         stage('Terraform Init') {
             steps {
-                script {
-                    dir('env/dev') {
-                        sh 'terraform init'
-                    }
+                dir('env/dev') {
+                    sh 'terraform init'
                 }
             }
         }
 
         stage('Terraform Plan') {
             steps {
-                script {
-                    dir('env/dev') {
-                        sh 'terraform plan -out=tfplan'
-                    }
+                dir('env/dev') {
+                    sh 'terraform plan -out=tfplan'
                 }
             }
         }
 
         stage('Terraform Apply') {
             steps {
-                script {
-                    dir('env/dev') {
-                        sh 'terraform apply -auto-approve tfplan'
-                    }
+                dir('env/dev') {
+                    sh 'terraform apply -auto-approve tfplan'
                 }
             }
         }
