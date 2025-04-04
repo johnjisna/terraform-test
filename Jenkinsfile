@@ -1,22 +1,17 @@
 pipeline {
     agent any
 
-tools {
-    terraform 'Terraform' 
-}
-
-    environment {
-        AWS_REGION = "us-east-1"
-        S3_BUCKET = "backenddb-terraform"
-        DYNAMODB_TABLE = "backend-db"
+    tools {
+        terraform 'Terraform' 
     }
 
     stages {
-        
         stage('Terraform Init') {
             steps {
                 script {
-                    sh 'terraform init'
+                    dir('env/dev') {
+                        sh 'terraform init'
+                    }
                 }
             }
         }
@@ -24,7 +19,9 @@ tools {
         stage('Terraform Plan') {
             steps {
                 script {
-                    sh 'terraform plan -out=tfplan'
+                    dir('env/dev') {
+                        sh 'terraform plan -out=tfplan'
+                    }
                 }
             }
         }
@@ -32,20 +29,11 @@ tools {
         stage('Terraform Apply') {
             steps {
                 script {
-                    input message: "Approve Terraform Apply?"
-                    sh 'terraform apply -auto-approve tfplan'
+                    dir('env/dev') {
+                        sh 'terraform apply -auto-approve tfplan'
+                    }
                 }
             }
-        }
-
-    }
-
-    post {
-        success {
-            slackSend(color: '#00FF00', message: "Terraform applied successfully ✅")
-        }
-        failure {
-            slackSend(color: '#FF0000', message: "Terraform failed ❌")
         }
     }
 }
