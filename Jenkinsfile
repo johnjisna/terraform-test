@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+tools {
+    terraform 'Terraform' 
+}
+
     environment {
         AWS_REGION = "us-east-1"
         S3_BUCKET = "backenddb-terraform"
