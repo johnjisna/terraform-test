@@ -5,6 +5,10 @@ pipeline {
         terraform 'Terraform'
     }
 
+    environment {
+        AWS_REGION = 'us-east-1' // Update to your region if different
+    }
+
     stages {
         stage('Checkout Code') {
             steps {
@@ -14,24 +18,39 @@ pipeline {
 
         stage('Terraform Init') {
             steps {
-                dir('env/dev') {
-                    sh 'terraform init'
+                withCredentials([[
+                    $class: 'AmazonWebServicesCredentialsBinding',
+                    credentialsId: 'terraform-backend-access'
+                ]]) {
+                    dir('envs/dev') {
+                        sh 'terraform init'
+                    }
                 }
             }
         }
 
         stage('Terraform Plan') {
             steps {
-                dir('env/dev') {
-                    sh 'terraform plan -out=tfplan'
+                withCredentials([[
+                    $class: 'AmazonWebServicesCredentialsBinding',
+                    credentialsId: 'terraform-backend-access'
+                ]]) {
+                    dir('envs/dev') {
+                        sh 'terraform plan -out=tfplan'
+                    }
                 }
             }
         }
 
         stage('Terraform Apply') {
             steps {
-                dir('env/dev') {
-                    sh 'terraform apply -auto-approve tfplan'
+                withCredentials([[
+                    $class: 'AmazonWebServicesCredentialsBinding',
+                    credentialsId: 'terraform-backend-access'
+                ]]) {
+                    dir('envs/dev') {
+                        sh 'terraform apply -auto-approve tfplan'
+                    }
                 }
             }
         }
