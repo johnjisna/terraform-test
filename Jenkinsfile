@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        AWS_REGION = "us-east-1""
+        AWS_REGION = "us-east-1"
         S3_BUCKET = "backenddb-terraform"
         DYNAMODB_TABLE = "backend-db"
     }
