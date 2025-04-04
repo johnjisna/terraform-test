@@ -6,13 +6,24 @@ pipeline {
     }
 
     environment {
-        AWS_REGION = 'us-east-1' // Update to your region if different
+        AWS_REGION = 'us-east-1'
     }
 
     stages {
         stage('Checkout Code') {
             steps {
                 checkout scm
+            }
+        }
+
+        stage('Verify AWS Credentials') {
+            steps {
+                withCredentials([[
+                    $class: 'AmazonWebServicesCredentialsBinding',
+                    credentialsId: 'terraform-backend-access'
+                ]]) {
+                    sh 'aws sts get-caller-identity'
+                }
             }
         }
 
