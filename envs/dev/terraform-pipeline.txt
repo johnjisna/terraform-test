@@ -1,0 +1,47 @@
+pipeline {
+    agent any
+
+    environment {
+        AWS_REGION = "your-region"
+        S3_BUCKET = "your-terraform-state-bucket"
+        DYNAMODB_TABLE = "terraform-lock"
+    }
+
+    stages {
+        
+        stage('Terraform Init') {
+            steps {
+                script {
+                    sh 'terraform init'
+                }
+            }
+        }
+
+        stage('Terraform Plan') {
+            steps {
+                script {
+                    sh 'terraform plan -out=tfplan'
+                }
+            }
+        }
+
+        stage('Terraform Apply') {
+            steps {
+                script {
+                    input message: "Approve Terraform Apply?"
+                    sh 'terraform apply -auto-approve tfplan'
+                }
+            }
+        }
+
+    }
+
+    post {
+        success {
+            slackSend(color: '#00FF00', message: "Terraform applied successfully ✅")
+        }
+        failure {
+            slackSend(color: '#FF0000', message: "Terraform failed ❌")
+        }
+    }
+}
