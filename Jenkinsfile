@@ -1,5 +1,6 @@
 pipeline {
     agent any
+
     options { 
         buildDiscarder(logRotator(numToKeepStr: "3")) 
     }
@@ -59,18 +60,10 @@ pipeline {
 
     post {
         success {
-            slackSend (
-                channel: '#your-slack-channel',
-                color: 'good',
-                message: "✅ *Terraform Job Successful*\nJob: `${env.JOB_NAME}` #${env.BUILD_NUMBER}\n<${env.BUILD_URL}|Open Build>"
-            )
+            echo "✅ Pipeline executed successfully!"
         }
         failure {
-            slackSend (
-                channel: '#your-slack-channel',
-                color: 'danger',
-                message: "❌ *Terraform Job Failed*\nJob: `${env.JOB_NAME}` #${env.BUILD_NUMBER}\n<${env.BUILD_URL}|Open Build>"
-            )
+            echo "❌ Pipeline failed."
         }
     }
 }
