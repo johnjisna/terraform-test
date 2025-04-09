@@ -32,7 +32,7 @@ pipeline {
                     credentialsId: 'terraform-backend-access'
                 ]]) {
                     dir('envs/dev') {
-                        sh 'terraform init'
+                        sh 'terraform init -no-color'
                     }
                 }
             }
@@ -45,7 +45,7 @@ pipeline {
                     credentialsId: 'terraform-backend-access'
                 ]]) {
                     dir('envs/dev') {
-                        sh 'terraform plan -out=tfplan > plan_output.txt'
+                        sh 'terraform plan -no-color -out=tfplan > plan_output.txt'
                         sh 'aws s3 cp plan_output.txt s3://${S3_BUCKET}/plan_output-${BUILD_NUMBER}.txt'
                         echo "Terraform plan uploaded to: s3://${S3_BUCKET}/plan_output-${BUILD_NUMBER}.txt"
                     }
@@ -69,9 +69,9 @@ pipeline {
                         dir('envs/dev') {
                             if (params.DESTROY_INFRA) {
                                 input message: "Are you absolutely sure you want to destroy infrastructure?", ok: "Yes, Destroy!"
-                                sh 'terraform destroy'
+                                sh 'terraform destroy -auto-approve -no-color'
                             } else {
-                                sh 'terraform apply tfplan'
+                                sh 'terraform apply -auto-approve -no-color tfplan'
                             }
                         }
                     }
@@ -89,3 +89,9 @@ pipeline {
         }
     }
 }
+
+
+
+
+
+
