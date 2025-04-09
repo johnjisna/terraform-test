@@ -5,7 +5,7 @@ key_name       = "my-key"
 instance_name  = "my-ec2-instance"
 region         = "us-east-1"
 
-secret_name        = "sayonetech-dev-secret-version7"
+secret_name        = "sayonetech-dev-secret-version8"
 secret_description = "Database credentials for updated application"
 secret_values = {
   username = "newadmin"
