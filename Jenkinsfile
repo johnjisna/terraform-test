@@ -11,7 +11,6 @@ pipeline {
 
     environment {
         AWS_REGION = "${REGION}"
-        S3_BUCKET = "terraform-logs-123"
     }
 
     parameters {
@@ -46,8 +45,19 @@ pipeline {
                 ]]) {
                     dir('envs/dev') {
                         sh 'terraform plan -no-color -out=tfplan > plan_output.txt'
-                        sh 'aws s3 cp plan_output.txt s3://${S3_BUCKET}/plan_output-${BUILD_NUMBER}.txt'
-                        echo "Terraform plan uploaded to: s3://${S3_BUCKET}/plan_output-${BUILD_NUMBER}.txt"
+                        script {
+                            def planContent = readFile('plan_output.txt')
+                            mail to: 'jisna@sayonetech.com',
+                                 subject: "Terraform Plan Output - Build #${BUILD_NUMBER}",
+                                 body: """Hi,
+
+Here is the Terraform plan output for Build #${BUILD_NUMBER}:
+
+${planContent}
+
+Regards,
+Jenkins"""
+                        }
                     }
                 }
             }
@@ -89,9 +99,3 @@ pipeline {
         }
     }
 }
-
-
-
-
-
-
