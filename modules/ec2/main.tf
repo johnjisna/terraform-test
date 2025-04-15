@@ -53,8 +53,7 @@ resource "aws_instance" "web" {
   vpc_security_group_ids = [var.security_group_id]  # Attach the security group
 
 
-user_data = file("scripts/setup.sh")
-
+  user_data = file("${path.module}/../scripts/setup.sh")
 
 
   tags = {
