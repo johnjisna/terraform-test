@@ -91,8 +91,14 @@ user_data = <<-EOF
 
   # Install AWS CLI
   curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-  unzip awscliv2.zip
-  sudo ./aws/install
+  unzip awscliv2.zip -d awscliv2
+  sudo ./awscliv2/aws/install
+
+  # Validate AWS CLI install
+  aws --version | tee -a /var/log/user_data.log
+
+  # Cleanup
+  rm -rf awscliv2 awscliv2.zip
 
   sudo reboot -i
 EOF
