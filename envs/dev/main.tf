@@ -14,6 +14,7 @@ module "ec2" {
   environment   = var.environment
   security_group_id = module.sg.sg_id
   jenkins_pub_key = var.jenkins_pub_key
+  EC2_USER_DATA = var.EC2_USER_DATA
 
 }
 
