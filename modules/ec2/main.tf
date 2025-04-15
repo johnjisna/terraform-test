@@ -52,9 +52,7 @@ resource "aws_instance" "web" {
 
   vpc_security_group_ids = [var.security_group_id]  # Attach the security group
 
-
-   user_data = file(var.EC2_USER_DATA)
-
+   user_data = file("${path.root}/${var.EC2_USER_DATA}")
 
   tags = {
     Name        = var.instance_name
