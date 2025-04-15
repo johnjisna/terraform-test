@@ -4,7 +4,8 @@ instance_type  = "t2.micro"
 key_name       = "my-key"
 instance_name  = "my-ec2-instance"
 region         = "us-east-1"
-EC2_USER_DATA = "scripts/setup.sh"
+EC2_USER_DATA  = "${path.root}/modules/scripts/setup.sh"
+
 
 secret_name        = "sayonetech-dev-secret-version-8"
 secret_description = "Database credentials for updated application"
