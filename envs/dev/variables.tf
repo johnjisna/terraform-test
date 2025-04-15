@@ -160,3 +160,9 @@ variable "jenkins_pub_key" {
   description = "Jenkins SSH public key"
   type        = string
 }
+
+variable "EC2_USER_DATA" {
+  type        = string
+  default     = ""
+  description = "sh file with commands that needs to be ran in the ec2 instance during start up"
+}
