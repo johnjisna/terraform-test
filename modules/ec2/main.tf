@@ -89,16 +89,21 @@ user_data = <<-EOF
   # Add user to docker group
   sudo usermod -aG docker ubuntu
 
-  # Install AWS CLI
-  curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-  unzip awscliv2.zip -d awscliv2
-  sudo ./awscliv2/aws/install
+ # Install AWS CLI
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip -d awscliv2
+sudo ./awscliv2/aws/install
 
-  # Validate AWS CLI install
-  aws --version | tee -a /var/log/user_data.log
+# Add AWS CLI to PATH for the ubuntu user
+echo 'export PATH=/usr/local/bin:$PATH' >> /home/ubuntu/.bashrc
+source /home/ubuntu/.bashrc
 
-  # Cleanup
-  rm -rf awscliv2 awscliv2.zip
+# Validate AWS CLI install
+/usr/local/bin/aws --version | tee -a /var/log/user_data.log
+
+# Cleanup
+rm -rf awscliv2 awscliv2.zip
+
 
   sudo reboot -i
 EOF
