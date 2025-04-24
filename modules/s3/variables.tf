@@ -10,19 +10,6 @@ variable "bucket_tag_name" {
   default     = "Default Bucket Tag"
 }
 
-variable "index_document_suffix" {
-  description = "The suffix for the index document in the S3 bucket website configuration"
-  type        = string
-  default     = "index.html"
-}
-
-variable "error_document_key" {
-  description = "The key for the error document in the S3 bucket website configuration"
-  type        = string
-  default     = "error.html"
-}
-
-
 variable "block_public_acls" {
   description = "Whether to block public ACLs"
   type        = bool
