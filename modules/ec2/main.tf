@@ -49,6 +49,9 @@ resource "aws_instance" "web" {
   ami           = length(data.aws_ami.preferred) > 0 ? data.aws_ami.preferred[0].id : data.aws_ami.fallback.id
   instance_type = var.instance_type
   key_name      = var.key_name
+  iam_instance_profile   = var.iam_role_name != ""
+                           ? aws_iam_instance_profile.ec2_profile[0].name
+                           : null
 
   vpc_security_group_ids = [var.security_group_id]  # Attach the security group
   user_data = file("${path.module}/${var.EC2_USER_DATA}")
