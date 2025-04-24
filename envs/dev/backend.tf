@@ -1,8 +1,8 @@
 terraform {
   backend "s3" {
-    bucket = var.remote_state_bucket
-    key    = var.remote_state_key
-    region = var.remote_state_region
+    bucket = "backenddb-terraform"
+    key    = "state"
+    region = "us-east-1"
     #dynamodb_table = "backend-db"
     use_lockfile = true
   }
