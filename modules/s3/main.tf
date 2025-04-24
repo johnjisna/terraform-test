@@ -7,18 +7,6 @@ resource "aws_s3_bucket" "s3_bucket" {
   }
 }
 
-resource "aws_s3_bucket_website_configuration" "website_config" {
-  bucket = aws_s3_bucket.s3_bucket.id
-
-  index_document {
-    suffix = var.index_document_suffix
-  }
-
-  error_document {
-    key = var.error_document_key
-  }
-}
-
 resource "aws_s3_bucket_public_access_block" "public_access" {
   bucket = aws_s3_bucket.s3_bucket.id
 
