@@ -49,3 +49,15 @@ variable "EC2_USER_DATA" {
   description = "sh file with commands that needs to be ran in the ec2 instance during start up"
 }
 
+variable "iam_role_name" {
+  type        = string
+  description = "Name of the IAM role to attach to EC2. Empty string to skip."
+  default     = ""
+}
+
+variable "iam_instance_profile_name" {
+  description = "Explicit name for the IAM Instance Profile. If blank, will default to \"${var.iam_role_name}-profile\"."
+  type        = string
+  default     = ""
+}
+
