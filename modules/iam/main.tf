@@ -44,3 +44,9 @@ resource "aws_iam_role_policy_attachment" "role_policy_attachments" {
   role       = aws_iam_role.role[0].name
   policy_arn = aws_iam_policy.policies[each.key].arn
 }
+
+resource "aws_iam_instance_profile" "ec2_profile" {
+  count = length(aws_iam_role.role) > 0 ? 1 : 0
+  name  = "${var.iam_role_name}-profile"
+  role  = aws_iam_role.role[0].name
+}
