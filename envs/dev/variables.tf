@@ -166,3 +166,30 @@ variable "EC2_USER_DATA" {
   default     = ""
   description = "sh file with commands that needs to be ran in the ec2 instance during start up"
 }
+
+variable "zone_name" {
+  description = "Name of the hosted zone"
+  type        = string
+}
+
+variable "record_name" {
+  description = "DNS record name"
+  type        = string
+}
+
+variable "record_type" {
+  description = "Type of DNS record"
+  type        = string
+}
+
+variable "ttl" {
+  description = "TTL for DNS record"
+  type        = number
+  default     = 300
+}
+
+variable "records" {
+  description = "List of values for DNS record"
+  type        = list(string)
+}
+
