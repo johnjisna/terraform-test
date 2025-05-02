@@ -108,3 +108,13 @@ module "sg" {
   sg_description = var.sg_description
   ingress_rules = var.ingress_rules
 }
+
+module "route53" {
+  source      = "../../modules/route53"
+  zone_name   = var.zone_name
+  record_name = var.record_name
+  record_type = var.record_type
+  ttl         = var.ttl
+  records     = var.records
+}
+
