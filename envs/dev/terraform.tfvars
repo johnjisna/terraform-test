@@ -43,3 +43,8 @@ ingress_rules = [
 
 jenkins_pub_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCynl2Qob9tiv8w8pu3rWmOPdZ6eR7fBIEBiBVTWJoBguNZQueBAE4qFJVGRkEUQTDJh+nGZ0tVTczk0ZpUPW7/P8foXQTAZThNCNBoSwjsOwHSoGhTL2uMd6eBHNOrzmNmDoCRp3MlCF8Q818/zzYJFUURyLpNRhOlbmfvJtVQVA7ltcqPU3IOeXqBHCSfjnCEfsKTzDKKrenG+8/FvluceQbIuYrwzA6iKhG8yrtskKfHeZbkwwuMhPQ4CtPTBTqkeq30qKUzAosvBLf2aZYtjcp6HGgFu1R5c/7cD8SFwkO418viRQZoMTCfQiMDoHBex4Y6mbA1LT8DOWcwGSLEq1F8OV5Pq6uSbewRuj1nRc6S/VsVOiCkKxhJxHdazw8BJE+72qogs7HlhQWhho9vQg80BZ1xTzaMettpqFyqskk259flNzGAkon72UbUAcAjLRwRgWKc/WTSxsHjCAy1J2tKfjiLxYpaGpoK67o30sq2943mFDGh+Bz7N7X6WMA7vTOxdYNhJur9Aj5OVDz91LD9doI9YLT1+F8PQbcNgJYWo8BN2zOCS/teP4Y+F8qIzJir9EVwJwNAjPMhYEJjh3SGW6GKY79NfNYpWiRMinyBkXx6sh/fMmTphtJb9N7y6Z5R+s3MJuiD32faAhA5DQg6rI+XZNmV/giuGNltJQ== jenkins-server"
 
+zone_name   = "myapp.com"
+record_name = "app.myapp.com"
+record_type = "A"
+ttl         = 300
+records     = ["192.0.2.123"]
