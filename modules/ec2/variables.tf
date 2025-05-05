@@ -56,5 +56,7 @@ variable "iam_role_name" {
 }
 
 variable "iam_instance_profile_name" {
-  description = "Explicit name for the IAM Instance Profile. If blank, will default to the IAM role name with '-profile' suffix."
+  type        = string
+  description = "The IAM instance profile to attach to the EC2 instance"
 }
+
