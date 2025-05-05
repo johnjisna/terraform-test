@@ -193,9 +193,4 @@ variable "records" {
   type        = list(string)
 }
 
-variable "iam_instance_profile_name" {
-  description = "Explicit name for the IAM Instance Profile"
-  type        = string
-  default     = "" # Make it optional by providing a default value
-}
 
