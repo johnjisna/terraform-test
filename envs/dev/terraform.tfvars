@@ -6,7 +6,7 @@ instance_name  = "my-ec2-instance"
 region         = "us-east-1"
 EC2_USER_DATA = "scripts/setup.sh"
 
-secret_name        = "sayonetech-dev-secret-version-6"
+secret_name        = "sayonetech-dev-secret-version-5"
 secret_description = "Database credentials for updated application"
 secret_values = {
   username = "newadmin"
