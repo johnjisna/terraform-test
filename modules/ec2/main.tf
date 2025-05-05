@@ -55,7 +55,9 @@ resource "aws_instance" "web" {
   instance_type = var.instance_type
   key_name      = var.key_name
 
-  iam_instance_profile = var.iam_role_name != "" ? aws_iam_instance_profile.ec2_profile[0].name : null
+#iam_instance_profile = var.iam_role_name != "" ? aws_iam_instance_profile.ec2_profile[0].name : null
+ iam_instance_profile = var.iam_instance_profile_name
+
 
   vpc_security_group_ids = [var.security_group_id]
   user_data              = file("${path.module}/${var.EC2_USER_DATA}")
