@@ -1,25 +1,25 @@
 variable "zone_name" {
-  description = "The name of the hosted zone"
+  description = "The domain name of the existing Route53 hosted zone"
   type        = string
 }
 
 variable "record_name" {
-  description = "The name of the DNS record"
+  description = "Name of the DNS record (e.g., www.example.com)"
   type        = string
 }
 
 variable "record_type" {
-  description = "The type of DNS record (e.g., A, CNAME)"
+  description = "Type of DNS record"
   type        = string
 }
 
 variable "ttl" {
-  description = "The TTL of the DNS record"
+  description = "Time to Live for DNS record"
   type        = number
   default     = 300
 }
 
 variable "records" {
-  description = "The list of record values"
+  description = "List of DNS record values"
   type        = list(string)
 }
