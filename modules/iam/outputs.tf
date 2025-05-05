@@ -14,6 +14,7 @@ output "iam_user_arn" {
 }
 
 output "instance_profile_name" {
-  value       = aws_iam_instance_profile.ec2_profile[0].name
+  value = length(aws_iam_instance_profile.ec2_profile) > 0 ? aws_iam_instance_profile.ec2_profile[0].name : null
   description = "The name of the EC2 instance profile"
 }
+
