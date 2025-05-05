@@ -60,3 +60,4 @@ variable "iam_instance_profile_name" {
   description = "The IAM instance profile to attach to the EC2 instance"
 }
 
+
